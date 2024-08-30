@@ -20,5 +20,11 @@ export const useTodoStore = defineStore('todo', {
         const indexToRemove = this.todos.findIndex(item => item.id === idToRemove);
         this.todos.splice(indexToRemove, 1);
     },
+    toggleCompletion(id: number) {
+        const todo = this.todos.find(todo => todo.id === id);
+        if (todo) {
+          todo.completed = !todo.completed;
+        }
+    },
   },
 });

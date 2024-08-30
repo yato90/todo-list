@@ -4,7 +4,7 @@ import { defineEmits } from 'vue';
 
 const props = defineProps<{ todo: TodoItemType }>();
 
-const emit = defineEmits(['remove']);
+const emit = defineEmits(['remove', 'toggle']);
 </script>
 
 <template>
@@ -15,7 +15,11 @@ const emit = defineEmits(['remove']);
       <strong>Приоритет</strong> - {{ props.todo.priority }}
     </div>
     <div>
-      <input type="checkbox" v-model="todo.completed" />
+      <input 
+        type="checkbox" 
+        :checked="props.todo.completed" 
+        @change="$emit('toggle', props.todo.id)" 
+      />
       <button @click="$emit('remove')">Удалить</button>
     </div>
   </div>

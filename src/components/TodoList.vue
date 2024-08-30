@@ -52,6 +52,10 @@ const onSubmit = () => {
 const removeTodo = (id: number) => {
   todoStore.removeTodo(id);
 };
+
+const toggleTodoCompletion = (id: number) => {
+  todoStore.toggleCompletion(id);
+};
 </script>
 
 <template>
@@ -81,6 +85,7 @@ const removeTodo = (id: number) => {
                 :key="todo.id"
                 :todo="todo"
                 @remove="removeTodo(todo.id)"
+                @toggle="toggleTodoCompletion(todo.id)"
             />
         </div>
     </div>
