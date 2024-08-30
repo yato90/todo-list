@@ -13,12 +13,13 @@ export const useTodoStore = defineStore('todo', {
             id: Date.now(),
             ...todo,
         };
-        this.todos.push(newTodo);
+        // Создаем новый массив, добавляя новую задачу
+        this.todos = [...this.todos, newTodo];
     },
 
     removeTodo(idToRemove: number) {
-        const indexToRemove = this.todos.findIndex(item => item.id === idToRemove);
-        this.todos.splice(indexToRemove, 1);
+        // Создаем новый массив, исключая задачу с указанным id
+        this.todos = this.todos.filter(item => item.id !== idToRemove);
     },
     toggleCompletion(id: number) {
         const todo = this.todos.find(todo => todo.id === id);

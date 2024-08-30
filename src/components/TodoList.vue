@@ -19,7 +19,6 @@ const { state: formState, reset: resetForm } = useForm<TodoForm>({
 });
 
 const todoStore = useTodoStore();
-const todos = todoStore.todos;
 
 const errors = reactive<ErrorsType>({
   title: '',
@@ -79,9 +78,9 @@ const toggleTodoCompletion = (id: number) => {
             </div>
             <button type="submit">Добавить</button>
         </form>
-        <div v-if="todos.length > 0">
+        <div v-if="todoStore.todos.length > 0">
             <TodoItems
-                v-for="todo in todos"
+                v-for="todo in todoStore.todos"
                 :key="todo.id"
                 :todo="todo"
                 @remove="removeTodo(todo.id)"
@@ -114,32 +113,32 @@ textarea {
 	padding: 8px 0 8px 10px;
 }
 select {
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 8px 12px;
-    font-size: 16px;
-    color: #333; 
-    width: 100%;
-    max-width: 300px;
-    outline: none;
-    cursor: pointer;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 16px;
+  color: #333; 
+  width: 100%;
+  max-width: 300px;
+  outline: none;
+  cursor: pointer;
 }
 select:focus {
-    border-color: #66afe9;
-    box-shadow: 0 0 5px rgba(102, 175, 233, 0.6);
+  border-color: #66afe9;
+  box-shadow: 0 0 5px rgba(102, 175, 233, 0.6);
 }
 button {
-    margin-top: 1em;
+  margin-top: 1em;
 }
 .form_item{
-    display: flex;
-    align-items:center;
-    flex-direction: column;
-    margin-bottom: 1rem;
+  display: flex;
+  align-items:center;
+  flex-direction: column;
+  margin-bottom: 1rem;
 }
 .error {
-    color: red;
-    font-size: 0.9em;
+  color: red;
+  font-size: 0.9em;
 }
 </style>
