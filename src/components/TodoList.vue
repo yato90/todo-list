@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { reactive, defineAsyncComponent  } from 'vue';
 import { useTodoStore } from '../store/TodoStore';
 import { useForm } from '../helpers/form/useForm';
-import { Priority, Errors as ErrorsType } from '../store/interface';
-import TodoItems from './Todoitem.vue';
+import { Priority, Errors as ErrorsType, TodoItem as TodoItemType } from '../store/interface';
+
+// Ленивый импорт компонента TodoItems
+const TodoItems = defineAsyncComponent(() => import('./Todoitem.vue'));
 
 // Определение интерфейса для формы задач
 interface TodoForm {
@@ -92,8 +94,8 @@ const toggleTodoCompletion = (id: number) => {
 
 <style scoped>
 form {
-    margin-bottom: 1em;
-    padding: 10px;
+  margin-bottom: 1em;
+  padding: 10px;
 }
 input {
 	width: 300px;
