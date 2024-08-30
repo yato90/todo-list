@@ -71,9 +71,9 @@ const toggleTodoCompletion = (id: number) => {
             </div>
             <div class="form_item">
                 <select v-model="formState.priority">
-                    <option :value="Priority.Low">Низкий приоритет</option>
-                    <option :value="Priority.Medium">Средний приоритет</option>
-                    <option :value="Priority.High">Высокий приоритет</option>
+                    <option :value="Priority.Low">Low</option>
+                    <option :value="Priority.Medium">Medium</option>
+                    <option :value="Priority.High">High</option>
                 </select>
             </div>
             <button type="submit">Добавить</button>
