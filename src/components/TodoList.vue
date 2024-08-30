@@ -2,7 +2,7 @@
 import { reactive } from 'vue';
 import { useTodoStore } from '../store/TodoStore';
 import { useForm } from '../helpers/form/useForm';
-import { Priority } from '../store/interface';
+import { Priority, Errors as ErrorsType } from '../store/interface';
 import TodoItems from './Todoitem.vue';
 
 // Определение интерфейса для формы задач
@@ -21,7 +21,7 @@ const { state: formState, reset: resetForm } = useForm<TodoForm>({
 const todoStore = useTodoStore();
 const todos = todoStore.todos;
 
-const errors = reactive<{ title: string; description: string }>({
+const errors = reactive<ErrorsType>({
   title: '',
   description: '',
 });
