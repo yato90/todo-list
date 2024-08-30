@@ -10,6 +10,7 @@ export interface TodoItem {
     description: string;
     priority: Priority;
     completed: boolean;
+    isEditing: boolean;
 }
 
 export interface TodoState {

@@ -42,6 +42,7 @@ const onSubmit = () => {
       description: formState.description,
       priority: formState.priority,
       completed: false,
+      isEditing: false,
     });
 
     // Сбрасываем форму после добавления задачи
@@ -52,6 +53,18 @@ const onSubmit = () => {
 // Удаление задачи
 const removeTodo = (id: number) => {
   todoStore.removeTodo(id);
+};
+
+const editTodo = (id: number) => {
+  todoStore.editTodo(id);
+};
+
+const updateTodo = (id: number, updatedFields: Partial<Omit<TodoItemType, 'id'>>) => {
+  todoStore.updateTodo(id, updatedFields);
+};
+
+const cancelEdit = (id: number) => {
+  todoStore.cancelEdit(id);
 };
 
 const toggleTodoCompletion = (id: number) => {
@@ -85,6 +98,9 @@ const toggleTodoCompletion = (id: number) => {
                 v-for="todo in todoStore.todos"
                 :key="todo.id"
                 :todo="todo"
+                @edit="editTodo(todo.id)"
+                @update="updateTodo(todo.id, $event)"
+                @cancel="cancelEdit(todo.id)"
                 @remove="removeTodo(todo.id)"
                 @toggle="toggleTodoCompletion(todo.id)"
             />
