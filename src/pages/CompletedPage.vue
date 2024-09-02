@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <h2>Завершенные задачи</h2>
+    <h2>Выполненные задачи</h2>
 </template>
 
 <style scoped>
