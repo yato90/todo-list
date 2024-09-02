@@ -32,7 +32,7 @@ export const useTodoStore = defineStore('todo', {
         if (todo) {
           todo.isEditing = true;
         }
-      },
+    },
     updateTodo(id: number, updatedFields: Partial<Omit<TodoItem, 'id'>>) {
         const index = this.todos.findIndex(todo => todo.id === id);
         if (index !== -1) {
