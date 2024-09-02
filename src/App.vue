@@ -1,5 +1,4 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <h1>Todo List</h1>
@@ -7,8 +6,7 @@
     <router-link to="/">Главная</router-link> |
     <router-link to="/completed">Выполненные задачи</router-link>
   </nav>
-  <router-view/>
+  <router-view />
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

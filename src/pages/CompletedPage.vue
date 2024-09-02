@@ -1,37 +1,27 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useTodoActions } from '../helpers/todo/useTodoActions';
-import { useTodoFilters } from '../helpers//todo/useTodoFilters';
-import TodoItem from '../components/Todoitem.vue';
-import { Priority } from '../store/interface';
+import { ref } from 'vue'
+import { useTodoActions } from '../helpers/todo/useTodoActions'
+import { useTodoFilters } from '../helpers//todo/useTodoFilters'
+import TodoItem from '../components/TodoItem.vue'
+import { Priority } from '../store/interface'
 
-const { 
-  removeTodo, 
-  editTodo, 
-  updateTodo, 
-  cancelEdit, 
-  toggleTodoCompletion 
-} = useTodoActions();
+const { removeTodo, editTodo, updateTodo, cancelEdit, toggleTodoCompletion } = useTodoActions()
 // Используем хук для фильтрации задач
-const {
-  filteredTodos,
-  setPriorityFilter,
-  setDateRange
-} = useTodoFilters();
+const { filteredTodos, setPriorityFilter, setDateRange } = useTodoFilters()
 
 // Временные переменные для хранения значений фильтров
-const tempPriority = ref<string>("");
-const tempStartDate = ref<string | null>(null);
-const tempEndDate = ref<string | null>(null);
+const tempPriority = ref<string>('')
+const tempStartDate = ref<string | null>(null)
+const tempEndDate = ref<string | null>(null)
 
 // Применение фильтров по нажатию кнопки "Применить"
 const applyFilters = () => {
-    setPriorityFilter(tempPriority.value);
-    setDateRange(
-        tempStartDate.value ? new Date(tempStartDate.value) : null, 
-        tempEndDate.value ? new Date(tempEndDate.value) : null
-    );
-};
+  setPriorityFilter(tempPriority.value)
+  setDateRange(
+    tempStartDate.value ? new Date(tempStartDate.value) : null,
+    tempEndDate.value ? new Date(tempEndDate.value) : null
+  )
+}
 </script>
 
 <template>
@@ -73,21 +63,21 @@ const applyFilters = () => {
 
 <style scoped>
 input {
-	width: 300px;
-	font-size: 13px;
-	padding: 6px 0 4px 10px;
-	border: 1px solid #cecece;
-	background: #F6F6f6;
-	border-radius: 8px;
+  width: 300px;
+  font-size: 13px;
+  padding: 6px 0 4px 10px;
+  border: 1px solid #cecece;
+  background: #f6f6f6;
+  border-radius: 8px;
 }
 textarea {
-	overflow: auto;
-	resize: none;
-	width: 300px;
-	height: 70px;
-	background: #f6f6f6;
-	border: 1px solid #cecece;
-	padding: 8px 0 8px 10px;
+  overflow: auto;
+  resize: none;
+  width: 300px;
+  height: 70px;
+  background: #f6f6f6;
+  border: 1px solid #cecece;
+  padding: 8px 0 8px 10px;
 }
 select {
   background-color: white;
@@ -95,7 +85,7 @@ select {
   border-radius: 4px;
   padding: 8px 12px;
   font-size: 16px;
-  color: #333; 
+  color: #333;
   width: 100%;
   max-width: 300px;
   outline: none;
@@ -105,12 +95,12 @@ select:focus {
   border-color: #66afe9;
   box-shadow: 0 0 5px rgba(102, 175, 233, 0.6);
 }
-.filter{
-    display: flex;
-    flex-direction: column;
-    align-items:center;
+.filter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .filter > * {
-    margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 </style>
