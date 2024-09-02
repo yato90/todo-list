@@ -2,7 +2,8 @@
 import { reactive, defineAsyncComponent  } from 'vue';
 import { useTodoStore } from '../store/TodoStore';
 import { useForm } from '../helpers/form/useForm';
-import { Priority, Errors as ErrorsType, TodoItem as TodoItemType } from '../store/interface';
+import { useTodoActions } from '../helpers/todo/useTodoActions';
+import { Priority, Errors as ErrorsType } from '../store/interface';
 
 // Ленивый импорт компонента TodoItems
 const TodoItems = defineAsyncComponent(() => import('./Todoitem.vue'));
@@ -25,6 +26,14 @@ const { state: formState, reset: resetForm } = useForm<TodoForm>({
   priority: Priority.Low,
   date: today,
 });
+// Используем useTodoActions для дейсвий с задачами
+const { 
+  removeTodo, 
+  editTodo, 
+  updateTodo, 
+  cancelEdit, 
+  toggleTodoCompletion 
+} = useTodoActions();
 
 const todoStore = useTodoStore();
 
@@ -39,7 +48,6 @@ const validateForm = (): boolean => {
   errors.description = formState.description.trim() === '' ? 'Описание не введено' : '';
   return !errors.title && !errors.description;
 };
-
 // Отправка формы
 const onSubmit = () => {
   if (validateForm()) {
@@ -55,27 +63,6 @@ const onSubmit = () => {
     // Сбрасываем форму после добавления задачи
     resetForm();
   }
-};
-
-// Удаление задачи
-const removeTodo = (id: number) => {
-  todoStore.removeTodo(id);
-};
-
-const editTodo = (id: number) => {
-  todoStore.editTodo(id);
-};
-
-const updateTodo = (id: number, updatedFields: Partial<Omit<TodoItemType, 'id'>>) => {
-  todoStore.updateTodo(id, updatedFields);
-};
-
-const cancelEdit = (id: number) => {
-  todoStore.cancelEdit(id);
-};
-
-const toggleTodoCompletion = (id: number) => {
-  todoStore.toggleCompletion(id);
 };
 </script>
 

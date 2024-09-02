@@ -6,6 +6,11 @@ export const useTodoStore = defineStore('todo', {
         todos: [],
     }),
     persist: true,
+    getters: {
+        completedTodos(state): TodoItem[] {
+          return state.todos.filter(todo => todo.completed);
+        },
+    },
     actions: {
     // Исключаем id и генерируем свой
     addTodo(todo: Omit<TodoItem, 'id'>) {
