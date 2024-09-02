@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { TodoItem as TodoItemType } from '../store/interface';
-import { defineEmits } from 'vue';
 
 const props = defineProps<{ todo: TodoItemType }>();
 
@@ -20,7 +19,7 @@ const emit = defineEmits(['remove', 'toggle', 'edit', 'update', 'cancel']);
         v-model="todo.description" 
         @blur="$emit('update', { id: todo.id, description: todo.description })">
       </textarea>
-      <button @click="$emit('cancel', todo.id)">Cancel</button>
+      <button @click="$emit('cancel', todo.id)">Закрыть</button>
     </div>
     <div class="info" v-else>
       <h3 
