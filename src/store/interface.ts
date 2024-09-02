@@ -11,6 +11,7 @@ export interface TodoItem {
     priority: Priority;
     completed: boolean;
     isEditing: boolean;
+    date: string;
 }
 
 export interface TodoState {

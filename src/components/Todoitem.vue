@@ -8,6 +8,7 @@ const props = defineProps<{ todo: TodoItemType }>();
 const isModalVisible = ref<boolean>(false);
 let tempTitle = ref<string>(props.todo.title);
 let tempDescription = ref<string>(props.todo.description);
+let tempDate = ref<string>(props.todo.date);
 
 const emit = defineEmits(['remove', 'toggle', 'edit', 'update', 'cancel']);
 
@@ -15,18 +16,24 @@ const showConfirmation = () => {
   isModalVisible.value = true;
 };
 const confirmUpdate = () => {
-  emit('update', { id: props.todo.id, title: tempTitle.value, description: tempDescription.value });
+  emit('update', { 
+    id: props.todo.id,
+    title: tempTitle.value,
+    description: tempDescription.value,
+    date: tempDate.value
+  });
   isModalVisible.value = false;
 };
 const cancelUpdate = () => {
   emit('cancel', props.todo.id);
   isModalVisible.value = false;
 };
-
+// Сброс временных переменных при начале редактирования
 watch(() => props.todo.isEditing, (newVal) => {
   if (newVal) {
     tempTitle.value = props.todo.title;
     tempDescription.value = props.todo.description;
+    tempDate.value = props.todo.date;
   }
 });
 </script>
@@ -44,6 +51,11 @@ watch(() => props.todo.isEditing, (newVal) => {
         v-model="tempDescription" 
         >
       </textarea>
+      <input 
+        class="input-edit" 
+        type="date" 
+        v-model="tempDate" 
+      />
       <button @click="showConfirmation">Сохранить изменения</button>
     </div>
     <div class="info" v-else>
@@ -54,8 +66,11 @@ watch(() => props.todo.isEditing, (newVal) => {
         {{ props.todo.title }}
       </h3>
       <p @click="$emit('edit', todo.id)">{{ props.todo.description }}</p>
-      <strong>Приоритет</strong> - {{ props.todo.priority }}
-      <button @click="$emit('edit', todo.id)">Изменить</button>
+      <div class="">
+        <strong>Приоритет</strong> - {{ props.todo.priority }}
+        <button @click="$emit('edit', todo.id)">Изменить</button>
+      </div>
+      <span>Дата: {{ props.todo.date }}</span>
     </div>
     <div>
       <input 
@@ -94,6 +109,10 @@ p{
 }
 button {
   margin-left: 1em;
+}
+span{
+  color:#565656;
+  font-size: 13px;
 }
 .info{
   width: 500px;

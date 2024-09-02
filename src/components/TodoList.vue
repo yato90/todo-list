@@ -12,12 +12,18 @@ interface TodoForm {
   title: string;
   description: string;
   priority: Priority;
+  date: string;
 }
+
+// Установка текущей даты по умолчанию
+const today = new Date().toISOString().split('T')[0];
+
 // Используем useForm для работы с формой задач
 const { state: formState, reset: resetForm } = useForm<TodoForm>({
   title: '',
   description: '',
   priority: Priority.Low,
+  date: today,
 });
 
 const todoStore = useTodoStore();
@@ -43,6 +49,7 @@ const onSubmit = () => {
       priority: formState.priority,
       completed: false,
       isEditing: false,
+      date: formState.date,
     });
 
     // Сбрасываем форму после добавления задачи
@@ -83,6 +90,9 @@ const toggleTodoCompletion = (id: number) => {
             <div class="form_item">
                 <textarea v-model="formState.description" placeholder="Описание"></textarea>
                 <span v-if="errors.description" class="error">{{ errors.description }}</span>
+            </div>
+            <div class="form_item">
+              <input type="date" v-model="formState.date" />
             </div>
             <div class="form_item">
                 <select v-model="formState.priority">
