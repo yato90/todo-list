@@ -59,13 +59,10 @@ watch(() => props.todo.isEditing, (newVal) => {
       <button @click="showConfirmation">Сохранить изменения</button>
     </div>
     <div class="info" v-else>
-      <h3 
-        :class="{ crossed: todo.completed }" 
-        @click="$emit('edit', todo.id)"
-      >
+      <h3 :class="{ crossed: todo.completed }">
         {{ props.todo.title }}
       </h3>
-      <p @click="$emit('edit', todo.id)">{{ props.todo.description }}</p>
+      <p>{{ props.todo.description }}</p>
       <div class="">
         <strong>Приоритет</strong> - {{ props.todo.priority }}
         <button @click="$emit('edit', todo.id)">Изменить</button>
