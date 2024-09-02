@@ -81,7 +81,6 @@ const toggleTodoCompletion = (id: number) => {
 
 <template>
     <div>
-        <h1>Todo List</h1>
         <form @submit.prevent="onSubmit">
             <div class="form_item">
                 <input type="text" v-model="formState.title" placeholder="Название" />
