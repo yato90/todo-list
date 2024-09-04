@@ -56,7 +56,7 @@ watch(
       <p>{{ props.todo.description }}</p>
       <div class="">
         <strong>Приоритет</strong> - {{ props.todo.priority }}
-        <button @click="$emit('edit', todo.id)">Изменить</button>
+        <button class="edit" @click="$emit('edit', todo.id)">Изменить</button>
       </div>
       <span>Дата: {{ props.todo.date }}</span>
     </div>
